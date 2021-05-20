@@ -44,6 +44,9 @@ values (1002, '4203-010'),
 		(1007, '4213-013'),
 		(1008, '5005-220')
 
+INSERT INTO Aluno_Disciplina(RaAluno, CodigoDisciplina)
+values (1002, '4213-003'),
+		
 
 SELECT * FROM Aluno_Disciplina
 
@@ -77,7 +80,7 @@ VALUES
 	--Lab banco de dados T
 	('4233-005', 'P1', 0.33),
 	('4233-005', 'P2', 0.33),
-	('4233-005', 'T', 0.33),
+	('4233-005', 'P3', 0.33),
 	--Métodos Para a Produção do Conhecimento - COMEX T
 	('5005-220', 'MC', 0.8),
 	('5005-220', 'MR', 0.2)
@@ -96,4 +99,10 @@ VALUES (1002, 1, 10),
 	   (1008, 1, 10)
 GO
 
+
+INSERT INTO Notas(RaAluno, CodigoAvaliacao, Nota)
+VALUES 
+       (1002, 19, 2)
+       
+GO
 SELECT * FROM Notas
