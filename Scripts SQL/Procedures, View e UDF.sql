@@ -1,12 +1,17 @@
 
-
+select * 
 
 --Pegar todos os alunos de uma determinada disciplina por codigo da disciplina
-select Aluno.Nome as 'Aluno', disc.Nome as 'Disciplina', disc.Turno as 'Turno' from Aluno 
+select Aluno.Ra, Aluno.Nome, ad.RaAluno, ad.CodigoDisciplina, disc.Codigo from Aluno 
 inner join Aluno_Disciplina as ad
 on ad.RaAluno = Aluno.Ra
 inner join Disciplina disc
 on disc.Codigo = ad.CodigoDisciplina
+where CodigoDisciplina = '4203-010'
+
+
+select * from Aluno
+
 
 --Pegar todas as disciplinas de um curso por turno
 select Nome, Turno from Disciplina where CodigoCurso = 1 and Turno = 'T'
