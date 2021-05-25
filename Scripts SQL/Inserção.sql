@@ -35,22 +35,6 @@ GO
 
 SELECT * FROM Disciplina
 
-INSERT INTO Aluno_Disciplina(RaAluno, CodigoDisciplina)
-values (1002, '4203-010'),
-		(1003, '4203-010'),
-		(1004, '4233-005'),
-		(1005, '4208-010'),
-		(1006, '4213-013'),
-		(1007, '4213-013'),
-		(1008, '5005-220')
-
-INSERT INTO Aluno_Disciplina(RaAluno, CodigoDisciplina)
-values (1002, '4213-003'),
-		
-
-SELECT * FROM Aluno_Disciplina
-
-
 INSERT INTO Avaliacao(CodigoDisciplina, Tipo, Peso)
 VALUES 
 	--Arquitetura T e N
@@ -89,6 +73,33 @@ GO
 
 SELECT * FROM Avaliacao
 
+
+INSERT INTO Aluno_Disciplina(RaAluno, CodigoDisciplina)
+values (1002, '4203-010'),
+		(1003, '4203-010'),
+		(1004, '4233-005'),
+		(1005, '4208-010'),
+		(1006, '4213-013'),
+		(1007, '4213-013'),
+		(1001, '5005-220')
+
+INSERT INTO Aluno_Disciplina(RaAluno, CodigoDisciplina)
+values
+		--(1004, '4203-010'),
+		--(1005, '4203-010'),
+		--(1006, '4203-010'),
+		--(1007, '4203-010'),
+		(1001, '4203-010')
+
+INSERT INTO Aluno_Disciplina(RaAluno, CodigoDisciplina)
+values (1002, '4213-003'),
+		
+
+SELECT * FROM Aluno_Disciplina
+
+
+
+/*
 INSERT INTO Notas(RaAluno, CodigoAvaliacao, Nota)
 VALUES (1002, 1, 10),
        (1003, 2, 10),
@@ -97,12 +108,24 @@ VALUES (1002, 1, 10),
 	   (1006, 1, 9), 
 	   (1007, 1, 10),
 	   (1008, 1, 10)
-GO
+GO*/
 
-
-INSERT INTO Notas(RaAluno, CodigoAvaliacao, Nota)
-VALUES 
-       (1002, 19, 2)
-       
-GO
 SELECT * FROM Notas
+
+--Trigger pra quando o aluno for iserido na disciplina ele vá para a tabela notas como null
+
+create trigger t_add_aluno_notas on Aluno_Disciplina
+for insert 
+as
+begin
+	declare @RaAluno as int,
+			@CodigoDisciplina as char(8)
+
+	set @RaAluno =  (select RaAluno from INSERTED)
+	set @CodigoDisciplina =  (select CodigoDisciplina from INSERTED)
+
+
+	insert into Notas (RaAluno, CodigoAvaliacao) select * from fn_aluno_avaliacao(@RaAluno, ''+@CodigoDisciplina+'')
+
+end
+

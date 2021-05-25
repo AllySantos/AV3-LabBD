@@ -3,6 +3,7 @@ package com.siga.api.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,7 @@ import com.siga.api.domain.repository.DisciplinaRepository;
 import com.siga.api.model.entity.Curso;
 import com.siga.api.model.entity.Disciplina;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/disciplinas")
 public class DisciplinaController {
@@ -28,10 +30,9 @@ public class DisciplinaController {
 	@GetMapping("/curso/{codigoCurso}")
 	public List<Disciplina> getDisciplinaByCurso(@PathVariable int codigoCurso){
 		
-		Curso curso = new Curso();
-		curso.setCodigo(codigoCurso);
 		
-		return disciplinaRepository.findAllByCurso(curso);
+		
+		return disciplinaRepository.findDisciplinasByCurso(codigoCurso);
 				
 	}
 	

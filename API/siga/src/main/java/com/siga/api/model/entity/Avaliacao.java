@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQuery;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -14,6 +15,10 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+
+@NamedNativeQuery(name = "Avaliacao.findAvaliacaoByDisciplina",
+							query = "select *  from Avaliacao where CodigoDisciplina = ?1 ",
+							resultClass = Avaliacao.class)
 public class Avaliacao {
 	
 	

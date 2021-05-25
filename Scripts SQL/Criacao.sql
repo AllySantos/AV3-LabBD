@@ -72,7 +72,7 @@ GO
 CREATE TABLE Notas(
 RaAluno INT						NOT NUll,
 CodigoAvaliacao INT				NOT NULL,
-Nota DECIMAL (7,2)				NOT NULL,
+Nota DECIMAL (7,2),
 
 PRIMARY KEY (RaAluno, CodigoAvaliacao),
 FOREIGN KEY (CodigoAvaliacao) REFERENCES Avaliacao (Codigo),

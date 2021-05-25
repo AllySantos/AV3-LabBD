@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQuery;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,8 +15,10 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
+
+@NamedNativeQuery(name = "Disciplina.findDisciplinasByCurso",
+					query = "select *  from Disciplina where CodigoCurso = ?1 ",
+					resultClass = Disciplina.class)
 public class Disciplina {
 
 	@Id

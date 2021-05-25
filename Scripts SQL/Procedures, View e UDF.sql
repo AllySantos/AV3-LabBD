@@ -1,6 +1,4 @@
 
-select * 
-
 --Pegar todos os alunos de uma determinada disciplina por codigo da disciplina
 select Aluno.Ra, Aluno.Nome, ad.RaAluno, ad.CodigoDisciplina, disc.Codigo from Aluno 
 inner join Aluno_Disciplina as ad
@@ -9,8 +7,8 @@ inner join Disciplina disc
 on disc.Codigo = ad.CodigoDisciplina
 where CodigoDisciplina = '4203-010'
 
+select * from Disciplina where CodigoCurso = 1 group by Disciplina.Nome
 
-select * from Aluno
 
 
 --Pegar todas as disciplinas de um curso por turno
@@ -166,3 +164,21 @@ end
 select * from fn_get_alunos_media('4213-003')
 
 
+
+--function teste pra inserir na tabela notas
+create function fn_aluno_avaliacao(@raAluno int, @CodigoDisicplina char(8))
+returns @notas table(
+	ra_aluno int,
+	codigo_avaliacao int
+)
+as
+begin
+
+	insert into @notas (codigo_avaliacao) select Codigo from Avaliacao where CodigoDisciplina = @CodigoDisicplina 
+
+	update @notas set ra_aluno = @raAluno
+
+	return
+end
+
+select * from fn_aluno_avaliacao( 1001, '4203-010')

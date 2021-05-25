@@ -4,20 +4,25 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.siga.api.domain.repository.AlunoNotaRepository;
 import com.siga.api.domain.repository.AlunoRepository;
 import com.siga.api.model.entity.Aluno;
+import com.siga.api.model.entity.AlunoNota;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/alunos")
 public class AlunoController {
 
 	@Autowired
 	private AlunoRepository alunoRepository;
+
 	
 	@GetMapping
 	public List<Aluno> getAlunos(){
@@ -28,6 +33,9 @@ public class AlunoController {
 	public List<Aluno> getAlunosByDisciplina(@PathVariable String codigoDisciplina){
 		return alunoRepository.findAlunoByDisciplina(codigoDisciplina);
 	}
+	
+	
+	
 	
 	@GetMapping("/{raAluno}")
 	public ResponseEntity<Aluno> getAlunosByRa(@PathVariable int raAluno){
