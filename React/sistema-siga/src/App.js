@@ -1,16 +1,16 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Menu from './Components/Menu';
-import Notas from './Components/Notas';
-
+import { BrowserRouter } from 'react-router-dom';
 
 function App() {
   return (
     <>
-      <Menu />
-      <Notas />
-    </>
+      <BrowserRouter>
+        <Menu />
+      </BrowserRouter>
 
+    </>
 
   );
 }

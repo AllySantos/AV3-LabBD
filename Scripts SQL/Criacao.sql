@@ -81,4 +81,5 @@ FOREIGN KEY (RaAluno) REFERENCES Aluno(Ra),
 GO
 
 
+select * from Notas
 

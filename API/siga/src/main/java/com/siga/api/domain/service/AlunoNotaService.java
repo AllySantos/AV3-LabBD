@@ -29,7 +29,8 @@ public class AlunoNotaService {
 
 		for(AlunoNota aluno : lista) {
 			if(aluno.getNota() == null) {
-				aluno.setNota(Float.valueOf(0));
+				aluno.setNota((float) 0.0);
+				System.out.println(aluno.getNota());
 			}
 		}
 		

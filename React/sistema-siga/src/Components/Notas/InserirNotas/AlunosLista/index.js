@@ -1,11 +1,30 @@
 import { useEffect, useState } from "react"
 import { Table, Form, Button } from 'react-bootstrap';
-import api from '../../../service/api'
+import InputMask from 'react-input-mask'
+import api from '../../../../service/api'
 
 export default function AlunosLista({ avaliacao }) {
 
   var [aluno, setAluno] = useState([])
   var jsonAlunoNota;
+
+
+
+  function setDefaultValue(a) {
+
+    var teste;
+    if (a.nota < 10) {
+      teste = a.nota * 0.1;
+      teste = teste.toFixed(2)
+
+    } else {
+      teste = a.nota.toFixed(2);
+    }
+
+
+    console.log(teste)
+    return teste;
+  }
 
   async function loadAlunos(avaliacao) {
 
@@ -74,13 +93,20 @@ export default function AlunosLista({ avaliacao }) {
         <tbody>
 
           {
+
             aluno.map((a) => (
               <tr key={a.ra}>
                 <td><Form.Control as="input" defaultValue={a.ra} name="aluno[]" plaintext /></td>
                 <td><Form.Control as="input" defaultValue={a.nome} name="aluno[]" plaintext /></td>
                 <td>
 
-                  <Form.Control as="input" className="w-25" defaultValue={a.nota} name="aluno[]" />
+                  <InputMask
+                    key={setDefaultValue(a)}
+                    mask="99.9"
+                    maskChar="_"
+                    className="form-control w-25"
+                    defaultValue={setDefaultValue(a)}
+                    name="aluno[]" />
                 </td>
               </tr>
             ))
@@ -91,7 +117,7 @@ export default function AlunosLista({ avaliacao }) {
       </Table>
 
       <Button variant="primary" type="submit">
-        Submit
+        Enviar notas
     </Button>
 
     </Form>
