@@ -1,9 +1,12 @@
 import { Navbar, Nav } from 'react-bootstrap';
 import Notas from '../Notas'
 
-import { Link, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import InserirNotas from '../Notas/InserirNotas';
 import ExibirMedia from '../Notas/ExibirMedia';
+import Faltas from '../Faltas';
+import ExibirFaltas from '../Faltas/ExibirFaltas';
+import InserirFaltas from '../Faltas/InserirFaltas';
 
 export default function Menu() {
 
@@ -15,7 +18,15 @@ export default function Menu() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">
 
-            <Link to="/notas">Notas</Link>
+            <Nav.Item>
+              <Nav.Link href="/notas">Notas</Nav.Link>
+
+            </Nav.Item>
+
+            <Nav.Item>
+              <Nav.Link href="/faltas">Faltas</Nav.Link>
+
+            </Nav.Item>
 
 
 
@@ -29,6 +40,10 @@ export default function Menu() {
         <Route path="/notas" component={Notas} />
         <Route path="/inserirNotas" component={InserirNotas} />
         <Route path="/visualizarNotas" component={ExibirMedia} />
+
+        <Route path="/faltas" component={Faltas} />
+        <Route path="/inserirFaltas" component={InserirFaltas} />
+        <Route path="/visualizarFalas" component={ExibirFaltas} />
       </Switch>
 
 

@@ -44,6 +44,7 @@ VALUES
     ('4203-020', 'P1', 0.3),
 	('4203-020', 'P2', 0.5),
 	('4203-020', 'T', 0.2),
+
 	--LAB Hardware T
 	('4208-010', 'P1', 0.3),
 	('4208-010', 'P2', 0.5),
@@ -71,6 +72,29 @@ VALUES
 	   
 GO
 
+INSERT INTO Avaliacao(CodigoDisciplina, Tipo, Peso)
+VALUES 
+	--Arquitetura T e N
+	('4203-010', 'E', 1),
+   ('4203-020', 'E', 1),
+
+	--LAB Hardware T
+	('4208-010', 'E', 1),
+	-- Banco de dados T
+	('4226-004', 'E', 1),
+
+	--Sistemas operacionais T E e N
+	('4213-013', 'E', 1),
+
+	('4213-003', 'E', 1),
+
+	--Lab banco de dados T
+	('4233-005', 'E', 1),
+
+	--Métodos Para a Produção do Conhecimento - COMEX T
+	('5005-220', 'E',1)
+
+GO
 SELECT * FROM Avaliacao
 
 
@@ -99,33 +123,28 @@ SELECT * FROM Aluno_Disciplina
 
 
 
-/*
-INSERT INTO Notas(RaAluno, CodigoAvaliacao, Nota)
-VALUES (1002, 1, 10),
-       (1003, 2, 10),
-       (1004, 1, 8),
-	   (1005, 1, 9),  
-	   (1006, 1, 9), 
-	   (1007, 1, 10),
-	   (1008, 1, 10)
-GO*/
+
+INSERT INTO Notas(RaAluno, CodigoAvaliacao)
+VALUES (1001, 33),
+       (1003, 32),
+       (1004, 32),
+	   (1005, 32),  
+	   (1006, 32), 
+	   (1007, 32),
+	   (1001, 32)
+GO
 
 SELECT * FROM Notas
 
---Trigger pra quando o aluno for iserido na disciplina ele vá para a tabela notas como null
-
-create trigger t_add_aluno_notas on Aluno_Disciplina
-for insert 
-as
-begin
-	declare @RaAluno as int,
-			@CodigoDisciplina as char(8)
-
-	set @RaAluno =  (select RaAluno from INSERTED)
-	set @CodigoDisciplina =  (select CodigoDisciplina from INSERTED)
+INSERT INTO Faltas(RaAluno, CodigoDisciplina, DataFalta ,Presenca)
+VALUES (1002, '4203-010', '2021-05-28', 2),
+       (1003, '4203-010', '2021-05-28', 0),
+       (1004, '4233-005', '2021-05-29', 0),
+	   (1005, '4208-010', '2021-05-29', 1),  
+	   (1006, '4213-013', '2021-05-30', 2), 
+	   (1007, '4213-013', '2021-05-30', 1)
+	   
+GO
 
 
-	insert into Notas (RaAluno, CodigoAvaliacao) select * from fn_aluno_avaliacao(@RaAluno, ''+@CodigoDisciplina+'')
-
-end
-
+select * from faltas where DataFalta = '2021-06-25'

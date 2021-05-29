@@ -1,26 +1,4 @@
 
---Pegar todos os alunos de uma determinada disciplina por codigo da disciplina
-select Aluno.Ra, Aluno.Nome, ad.RaAluno, ad.CodigoDisciplina, disc.Codigo from Aluno 
-inner join Aluno_Disciplina as ad
-on ad.RaAluno = Aluno.Ra
-inner join Disciplina disc
-on disc.Codigo = ad.CodigoDisciplina
-where CodigoDisciplina = '4203-010'
-
-select * from Disciplina where CodigoCurso = 1 group by Disciplina.Nome
-
-
-
---Pegar todas as disciplinas de um curso por turno
-select Nome, Turno from Disciplina where CodigoCurso = 1 and Turno = 'T'
-
-
---Pegar todas as avaliações de uma disciplina
-select Tipo, Peso from Avaliacao where CodigoDisciplina = '4203-010'
-
---UDF que retorna essa desgraça aqui 
---RA_Aluno, Nome_Aluno, Nota1, Nota2, ..., Média_Final, Situação(Aprovado ou  Reprovado))
-
 drop  function fn_get_alunos_media
 
 create function fn_get_alunos_media(@CodigoDisciplina as char(8))
@@ -176,26 +154,7 @@ select * from fn_get_alunos_media('5005-220')
 
 
 
---function teste pra inserir na tabela notas
-create function fn_aluno_avaliacao(@raAluno int, @CodigoDisicplina char(8))
-returns @notas table(
-	ra_aluno int,
-	codigo_avaliacao int
-)
-as
-begin
-
-	insert into @notas (codigo_avaliacao) select Codigo from Avaliacao where CodigoDisciplina = @CodigoDisicplina 
-
-	update @notas set ra_aluno = @raAluno
-
-	return
-end
-
-select * from fn_aluno_avaliacao( 1001, '4203-010')
 
 
-select Aluno.Ra, Aluno.Nome, Faltas.Presenca from Aluno 
-left join Faltas
-on Faltas.RaAluno is null
-where Faltas.CodigoDisciplina = '4203-010' and Faltas.DataFalta = '2021-05-28'
+
+

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { Table } from 'react-bootstrap';
 import api from '../../../../service/api'
 
-export default function AlunosLista({ disciplina }) {
+export default function AlunosListaFaltas({ disciplina }) {
 
   var [alunoMedia, setAlunoMedia] = useState([])
   var [avaliacao, setAvaliacao] = useState([])
@@ -54,7 +54,7 @@ export default function AlunosLista({ disciplina }) {
               <th>{av.tipo}</th>
             ))
           }
-
+          <th>Exame</th>
           <th>Media Final</th>
           <th>Situação</th>
         </tr>
@@ -74,28 +74,14 @@ export default function AlunosLista({ disciplina }) {
                   } else if (index === 1) {
                     return (<td>{a.nota2}</td>)
                   } else if (index === 2) {
-                    if (av.tipo === 'E') {
-                      return (<td>{a.exame}</td>)
-                    } else {
-                      return (<td>{a.nota3}</td>)
-                    }
-
-                  } else if (index === 3) {
-
-                    if (av.tipo === 'E') {
-                      return (<td>{a.exame}</td>)
-                    } else {
-                      return (<td>{a.nota4}</td>)
-                    }
-
+                    return (<td>{a.nota3}</td>)
+                  } else {
+                    return (<td>{a.nota4}</td>)
                   }
-
-                  return false;
-
                 })
               }
 
-
+              <td>{a.exame}</td>
               <td>{a.media_final}</td>
               <td>{a.situacao}</td>
             </tr>
