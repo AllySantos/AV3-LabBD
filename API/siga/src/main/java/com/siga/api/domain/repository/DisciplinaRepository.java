@@ -12,4 +12,5 @@ public interface DisciplinaRepository extends JpaRepository<Disciplina, String>{
 
 	public List<Disciplina> findDisciplinasByCurso(int codigoCurso);
 	public List<Disciplina> findAllBySigla(String sigla);
+	public Disciplina findByCodigo(String codigo);
 }
