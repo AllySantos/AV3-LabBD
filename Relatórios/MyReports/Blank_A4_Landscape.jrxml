@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4_Landscape" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a4aaef68-0425-4227-83a9-fef0de3a1258">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="176"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="815"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Escola"/>
+	<parameter name="codDiscipina" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[select ra_aluno, nome_aluno, nota1, nota2, nota3, nota4 , exame, media_final, situacao from dbo.fn_get_alunos_media($P{codDiscipina})]]>
+	</queryString>
+	<field name="ra_aluno" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="ra_aluno"/>
+		<property name="com.jaspersoft.studio.field.label" value="ra_aluno"/>
+	</field>
+	<field name="nome_aluno" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nome_aluno"/>
+		<property name="com.jaspersoft.studio.field.label" value="nome_aluno"/>
+	</field>
+	<field name="nota1" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="nota1"/>
+		<property name="com.jaspersoft.studio.field.label" value="nota1"/>
+	</field>
+	<field name="nota2" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="nota2"/>
+		<property name="com.jaspersoft.studio.field.label" value="nota2"/>
+	</field>
+	<field name="nota3" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="nota3"/>
+		<property name="com.jaspersoft.studio.field.label" value="nota3"/>
+	</field>
+	<field name="nota4" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="nota4"/>
+		<property name="com.jaspersoft.studio.field.label" value="nota4"/>
+	</field>
+	<field name="exame" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="exame"/>
+		<property name="com.jaspersoft.studio.field.label" value="exame"/>
+	</field>
+	<field name="media_final" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="media_final"/>
+		<property name="com.jaspersoft.studio.field.label" value="media_final"/>
+	</field>
+	<field name="situacao" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="situacao"/>
+		<property name="com.jaspersoft.studio.field.label" value="situacao"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
