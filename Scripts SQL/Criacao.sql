@@ -83,3 +83,4 @@ GO
 
 select * from Notas
 
+select * from Faltas where CodigoDisciplina = '4203-010' and RaAluno = 1001

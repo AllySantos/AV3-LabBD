@@ -1,3 +1,6 @@
+
+drop function fn_get_all_faltas
+
 create function fn_get_all_faltas(@CodigoDisciplina char(8))
 returns @alunos_falta table(
 	ra_aluno int,
@@ -30,15 +33,21 @@ begin
 
 	declare @Ra as int,
 			@DataFalta as date,
-			@Presenca as int
+			@Presenca as int,
+
+			@dataSemana as date,
+			@contadorAulasDadas as int,
+			@charFalta as char(4),
+			@numAulas as int,
+			@nomeColuna as varchar(50)
 
 
-	--Insere o RA e o nome dos alunos
+	--Insere o RA e o nome dos alunos da disciplina
 
-	insert into @alunos_media (ra_aluno, nome_aluno) select distinct RaAluno, Aluno.Nome FROM Faltas 
+	insert into @alunos_falta (ra_aluno, nome_aluno) select distinct RaAluno, Aluno.Nome FROM Faltas 
 													inner join Aluno
 													on Faltas.RaAluno = Aluno.Ra
-													where Notas.CodigoDisciplina = @CodigoDisciplina
+													where Faltas.CodigoDisciplina = @CodigoDisciplina
 
 
 	--Pega de uma disciplina em especifico
@@ -50,13 +59,162 @@ begin
 	OPEN c
 	FETCH NEXT FROM c INTO @Ra, @DataFalta, @Presenca
 
+
+	set @numAulas = (select NumAulas from Disciplina where Codigo = @CodigoDisciplina)
+	set @dataSemana = (SELECT top 1 DataFalta FROM Faltas 	where CodigoDisciplina = @CodigoDisciplina order by DataFalta)
+	set @contadorAulasDadas = 1
+
 	WHILE @@FETCH_STATUS = 0
 	BEGIN
 
+		if(@dataSemana != @DataFalta)
+		begin
+			set @contadorAulasDadas = @contadorAulasDadas + 1
+			set @dataSemana = @DataFalta
+		end
 
+		
 
-		FETCH NEXT FROM c INTO @Ra, @CodigoAvaliacao, @Nota
+			if(@Presenca = 1)
+			begin
+				if(@numAulas = 2)	
+				begin
+					set @charFalta = 'FP'
+				end
+				else
+				begin 
+					set @charFalta = 'FPPP'
+				end
+			end
+			else if(@Presenca = 2)
+			begin
+				if(@numAulas = 2)	
+				begin
+					set @charFalta = 'FF'
+				end
+				else
+				begin 
+					set @charFalta = 'FFPP'
+				end
+			end
+			else if(@Presenca = 3)
+			begin
+				
+				set @charFalta = 'FFFP'
+				
+			end
+			else
+			begin
+				set @charFalta = 'FFFF'
+				
+			end
+
+			--IF semanas // bosta de query dinamica q n funciona nesta merda
+	
+			if(@contadorAulasDadas = 1)
+			begin
+				update @alunos_falta set semana1 = @charFalta where ra_aluno = @Ra
+			end
+			if(@contadorAulasDadas = 2)
+			begin
+				update @alunos_falta set semana2 = @charFalta where ra_aluno = @Ra
+			end
+			if(@contadorAulasDadas = 3)
+			begin
+				update @alunos_falta set semana3 = @charFalta where ra_aluno = @Ra
+			end
+			if(@contadorAulasDadas = 4)
+			begin
+				update @alunos_falta set semana4 = @charFalta where ra_aluno = @Ra
+
+			end
+			if(@contadorAulasDadas = 5)
+			begin
+				update @alunos_falta set semana5 = @charFalta where ra_aluno = @Ra
+
+			end
+			if(@contadorAulasDadas = 6)
+			begin
+				update @alunos_falta set semana6 = @charFalta where ra_aluno = @Ra
+
+			end
+			if(@contadorAulasDadas = 7)
+			begin
+				update @alunos_falta set semana7 = @charFalta where ra_aluno = @Ra
+
+			end
+			if(@contadorAulasDadas = 8)
+			begin
+				update @alunos_falta set semana8 = @charFalta where ra_aluno = @Ra
+
+			end
+			if(@contadorAulasDadas = 9)
+			begin
+				update @alunos_falta set semana9 = @charFalta where ra_aluno = @Ra
+
+			end
+			if(@contadorAulasDadas = 10)
+			begin
+				update @alunos_falta set semana10 = @charFalta where ra_aluno = @Ra
+
+			end
+			if(@contadorAulasDadas = 11)
+			begin
+				update @alunos_falta set semana11 = @charFalta where ra_aluno = @Ra
+
+			end
+			if(@contadorAulasDadas = 12)
+			begin
+				update @alunos_falta set semana12 = @charFalta where ra_aluno = @Ra
+
+			end
+			if(@contadorAulasDadas = 13)
+			begin
+				update @alunos_falta set semana13 = @charFalta where ra_aluno = @Ra
+
+			end
+			if(@contadorAulasDadas = 14)
+			begin
+				update @alunos_falta set semana14 = @charFalta where ra_aluno = @Ra
+
+			end
+			if(@contadorAulasDadas = 15)
+			begin
+				update @alunos_falta set semana15 = @charFalta where ra_aluno = @Ra
+
+			end
+			if(@contadorAulasDadas = 16)
+			begin
+				update @alunos_falta set semana16 = @charFalta where ra_aluno = @Ra
+
+			end
+			if(@contadorAulasDadas = 17)
+			begin
+				update @alunos_falta set semana17 = @charFalta where ra_aluno = @Ra
+
+			end
+			if(@contadorAulasDadas = 18)
+			begin
+				update @alunos_falta set semana18 = @charFalta where ra_aluno = @Ra
+
+			end
+			if(@contadorAulasDadas = 19)
+			begin
+				update @alunos_falta set semana19 = @charFalta where ra_aluno = @Ra
+
+			end
+			if(@contadorAulasDadas = 20)
+			begin
+				update @alunos_falta set semana20 = @charFalta where ra_aluno = @Ra
+
+			end
+
+		FETCH NEXT FROM c INTO @Ra, @DataFalta, @Presenca
 	END
 	return
 
 end
+
+
+
+select * from fn_get_all_faltas('4203-010')

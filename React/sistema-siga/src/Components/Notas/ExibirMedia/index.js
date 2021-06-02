@@ -1,4 +1,4 @@
-import { Form, Row, Col } from 'react-bootstrap';
+import { Form, Row, Col, Button } from 'react-bootstrap';
 import { useEffect, useState } from 'react'
 import api from '../../../service/api'
 
@@ -83,11 +83,46 @@ export default function ExibirMedia() {
   }
 
 
+  async function emiteRelatorio(event) {
+    var teste = disciplinaSelecionada.codigo
+    await api.get("alunos/media/" + teste + "/relatorio")
+      .then((response) => {
+        var file = window.URL.createObjectURL(new Blob(response.data, { type: "application/pdf" }))
+
+        var a = document.createElement("a");
+        a.href = file;
+        a.download = response.name || "detailPDF";
+        document.body.appendChild(a);
+        a.click();
+        // remove `a` following `Save As` dialog, 
+        // `window` regains `focus`
+        window.onfocus = function () {
+          document.body.removeChild(a)
+        }
+
+
+      })
+      .catch((err) => {
+        console.error(err)
+      })
+  }
 
 
   return (
+
+
     <div className="containerNotas">
-      <h1>Visualizar  Notas</h1>
+      <Row>
+        <Col xs={10}>
+          <h1>Visualizar  Notas</h1>
+        </Col>
+        <Col >
+          <Button onClick={emiteRelatorio}>
+            Gerar relatório
+          </Button>
+        </Col>
+      </Row>
+
 
       <Form>
         <Row className="mt-4">

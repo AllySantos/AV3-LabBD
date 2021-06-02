@@ -41,6 +41,9 @@ public class AlunoMediaController {
 		try {
 			OutputStream out = response.getOutputStream();
 			alunoMediaService.exportRelatorio(codigoDisciplina, out);
+			
+			
+			System.out.println(out.toString());
 		} catch (IOException | JRException e) {
 			System.out.println(e.getMessage());
 		}
