@@ -5,8 +5,9 @@ import { Route, Switch } from 'react-router-dom';
 import InserirNotas from '../Notas/InserirNotas';
 import ExibirMedia from '../Notas/ExibirMedia';
 import Faltas from '../Faltas';
-import ExibirFaltas from '../Faltas/ExibirFaltas';
+
 import InserirFaltas from '../Faltas/InserirFaltas';
+import ExibirFaltas from '../Faltas/ExibirFaltas';
 
 export default function Menu() {
 
@@ -43,7 +44,7 @@ export default function Menu() {
 
         <Route path="/faltas" component={Faltas} />
         <Route path="/inserirFaltas" component={InserirFaltas} />
-        <Route path="/visualizarFalas" component={ExibirFaltas} />
+        <Route path="/visualizarFaltas" component={ExibirFaltas} />
       </Switch>
 
 

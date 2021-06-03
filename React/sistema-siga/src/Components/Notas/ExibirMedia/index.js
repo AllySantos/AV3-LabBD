@@ -94,8 +94,7 @@ export default function ExibirMedia() {
         a.download = response.name || "detailPDF";
         document.body.appendChild(a);
         a.click();
-        // remove `a` following `Save As` dialog, 
-        // `window` regains `focus`
+
         window.onfocus = function () {
           document.body.removeChild(a)
         }

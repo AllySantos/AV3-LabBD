@@ -24,7 +24,8 @@ returns @alunos_falta table(
 	semana17 char(4),
 	semana18 char(4),
 	semana19 char(4),
-	semana20 char(4)
+	semana20 char(4),
+	total_faltas int
 	
 )
 as
@@ -39,7 +40,8 @@ begin
 			@contadorAulasDadas as int,
 			@charFalta as char(4),
 			@numAulas as int,
-			@nomeColuna as varchar(50)
+			@nomeColuna as varchar(50),
+			@totalFaltas as int
 
 
 	--Insere o RA e o nome dos alunos da disciplina
@@ -103,10 +105,14 @@ begin
 				set @charFalta = 'FFFP'
 				
 			end
-			else
+			else if(@Presenca = 4)
 			begin
 				set @charFalta = 'FFFF'
 				
+			end
+			else
+			begin
+				set @charFalta = 'PPPP'
 			end
 
 			--IF semanas // bosta de query dinamica q n funciona nesta merda
@@ -209,6 +215,10 @@ begin
 
 			end
 
+			
+			update @alunos_falta set total_faltas = (ISNULL(total_faltas, 0) + @Presenca)  where ra_aluno = @Ra
+
+
 		FETCH NEXT FROM c INTO @Ra, @DataFalta, @Presenca
 	END
 	return
@@ -218,3 +228,5 @@ end
 
 
 select * from fn_get_all_faltas('4203-010')
+
+SELECT RaAluno, CodigoDisciplina, DataFalta FROM Faltas where CodigoDisciplina = '4203-010' and RaAluno = (select top 1 RaAluno from Aluno_Disciplina where CodigoDisciplina = '4203-010') order by DataFalta

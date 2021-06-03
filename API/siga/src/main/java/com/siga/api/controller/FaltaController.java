@@ -53,4 +53,11 @@ public class FaltaController {
 		
 		return faltaRepository.findByAluno(raAluno);
 	}
+	
+	@GetMapping("/datas-aula/{codigoAvaliacao}")
+	public List<Date> getFaltaByAluno(@PathVariable String codigoAvaliacao){
+
+		
+		return faltaService.dataAulasDadas(codigoAvaliacao);
+	}
 }

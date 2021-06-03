@@ -15,5 +15,7 @@ public interface FaltaRepository extends JpaRepository<Falta, FaltaId>{
 
 	public List<Falta> findByDisciplinaAndData (String codigoDisciplina, Date data);
 	public Falta findByAluno(int raAluno);
+	public List<Falta> getDatasFalta(String codigoDisciplina);
+	
 
 }

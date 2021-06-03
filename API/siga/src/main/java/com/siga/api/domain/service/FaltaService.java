@@ -1,6 +1,8 @@
 package com.siga.api.domain.service;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,5 +37,18 @@ public class FaltaService {
 		Falta falta = new Falta(id, faltaDTO.getQtdePresenca());
 		
 		return falta;
+	}
+	
+	public List<Date> dataAulasDadas(String codigoDisciplina){
+		
+		List<Date> datasAulas = new ArrayList<Date>();
+		
+		List<Falta> faltas = faltaRepository.getDatasFalta(codigoDisciplina);
+		
+		for(Falta f : faltas) {
+			datasAulas.add(f.getId().getDataFalta());
+		}
+		
+		return datasAulas;
 	}
 }
