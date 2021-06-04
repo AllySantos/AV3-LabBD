@@ -57,7 +57,7 @@
 			<staticText>
 				<reportElement x="20" y="20" width="370" height="30" uuid="f6484773-9e50-4019-9c1f-4afb7223bbf0"/>
 				<textElement>
-					<font fontName="Bookman Old Style" size="19" isBold="true"/>
+					<font fontName="Arial" size="19" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Relatório de Média da Turma]]></text>
 			</staticText>

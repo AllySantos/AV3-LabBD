@@ -230,3 +230,12 @@ end
 select * from fn_get_all_faltas('4203-010')
 
 SELECT RaAluno, CodigoDisciplina, DataFalta FROM Faltas where CodigoDisciplina = '4203-010' and RaAluno = (select top 1 RaAluno from Aluno_Disciplina where CodigoDisciplina = '4203-010') order by DataFalta
+
+
+
+SELECT distinct DataFalta FROM Faltas where CodigoDisciplina = '4203-010' order by DataFalta
+
+select ra_aluno, nome_aluno, 
+semana1, semana2, semana3, semana4, semana5, semana6, semana7, semana8, semana9, semana10,
+semana11, semana12, semana13, semana14, semana15, semana16, semana17, semana18, semana19, semana20, total_faltas
+from fn_get_all_faltas('4203-010')

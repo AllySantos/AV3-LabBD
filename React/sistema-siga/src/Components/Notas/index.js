@@ -5,7 +5,7 @@ export default function Notas() {
 
 
   return (
-    <div class="container">
+    <div className="container">
       <h1>Notas</h1>
       <Row xs={1} md={2} className="row justify-content-center">
         <Col>

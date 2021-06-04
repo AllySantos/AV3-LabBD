@@ -1,4 +1,4 @@
-import { Form, Row, Col } from 'react-bootstrap';
+import { Form, Row, Col, Button } from 'react-bootstrap';
 import { useEffect, useState } from 'react'
 import api from '../../../service/api'
 
@@ -83,11 +83,30 @@ export default function ExibirFaltas() {
   }
 
 
+  async function emiteRelatorio(event) {
+    var url = "http://localhost:8080/faltas/" + disciplinaSelecionada.codigo + "/relatorio"
 
+    const pdfWindow = window.open();
+    pdfWindow.location.href = url;
+
+  }
 
   return (
     <div className="containerNotas">
-      <h1>Visualizar  Notas</h1>
+
+      <Row>
+        <Col>
+          <h1>Visualizar  Notas</h1>
+        </Col>
+
+        <Col >
+          <Button className="botao-relatorio" onClick={emiteRelatorio}>
+            Gerar Relatório
+          </Button>
+        </Col>
+      </Row>
+
+
 
       <Form>
         <Row className="mt-4">

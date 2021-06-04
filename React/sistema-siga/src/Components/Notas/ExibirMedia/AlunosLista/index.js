@@ -7,6 +7,7 @@ export default function AlunosLista({ disciplina }) {
   var [alunoMedia, setAlunoMedia] = useState([])
   var [avaliacao, setAvaliacao] = useState([])
 
+
   async function loadAvaliacao(disciplina) {
     await api.get("avaliacao/disciplina/" + disciplina.codigo)
       .then((response) => {

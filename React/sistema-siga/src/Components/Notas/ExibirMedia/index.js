@@ -62,6 +62,13 @@ export default function ExibirMedia() {
 
   }
 
+  async function emiteRelatorio(event) {
+    var url = "http://localhost:8080/alunos/media/" + disciplinaSelecionada.codigo + "/relatorio"
+
+    const pdfWindow = window.open();
+    pdfWindow.location.href = url;
+
+  }
 
 
   function selectCurso(event) {
@@ -83,28 +90,7 @@ export default function ExibirMedia() {
   }
 
 
-  async function emiteRelatorio(event) {
-    var teste = disciplinaSelecionada.codigo
-    await api.get("alunos/media/" + teste + "/relatorio")
-      .then((response) => {
-        var file = window.URL.createObjectURL(new Blob(response.data, { type: "application/pdf" }))
 
-        var a = document.createElement("a");
-        a.href = file;
-        a.download = response.name || "detailPDF";
-        document.body.appendChild(a);
-        a.click();
-
-        window.onfocus = function () {
-          document.body.removeChild(a)
-        }
-
-
-      })
-      .catch((err) => {
-        console.error(err)
-      })
-  }
 
 
   return (
@@ -116,8 +102,8 @@ export default function ExibirMedia() {
           <h1>Visualizar  Notas</h1>
         </Col>
         <Col >
-          <Button onClick={emiteRelatorio}>
-            Gerar relatório
+          <Button className="botao-relatorio" onClick={emiteRelatorio}>
+            Gerar Relatório
           </Button>
         </Col>
       </Row>
